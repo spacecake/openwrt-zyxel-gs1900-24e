@@ -1,0 +1,1 @@
+# opwenwrt-zyxel-gs1900-24e
