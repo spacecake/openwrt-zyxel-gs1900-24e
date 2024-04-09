@@ -43,13 +43,8 @@ Serial connection parameters:  115200 8N1.
 * Navigate to Maintenance > Firmware
 * Select the HTTP radio button
 * Select the Active radio button
-* Use the browse button to locate the
-realtek-rtl838x-zyxel_gs1900-24e-initramfs-kernel.bin
-file and select open so File Path is updated with filename.
-* Select the Apply button. Screen will display "Prepare
-for firmware upgrade ...".
-*Wait until screen shows "Do you really want to reboot?"
-then select the OK button
+* Use the browse button to locate the realtek-rtl838x-zyxel_gs1900-24e-initramfs-kernel.bin file and select open so File Path is updated with filename.
+* Select the Apply button. Screen will display "Prepare for firmware upgrade ..." Wait until screen shows "Do you really want to reboot?"then select the OK button
 * Once OpenWrt has booted, scp the sysupgrade image to /tmp and flash it:
 ```
    > sysupgrade -n /tmp/realtek-rtl838x-zyxel_gs1900-24e-squashfs-sysupgrade.bin
@@ -64,21 +59,24 @@ then select the OK button
 * Connect serial, power up the switch, interrupt U-boot by hitting the
   space bar, and enable the network:
 ```
-   > rtk network on
+   rtk network on
 ```
-* Since the GS1900-24E is a dual-partition device, you want to keep the OEM
-  firmware on the backup partition for the time being. OpenWrt can only boot
-  from the first partition anyway (hardcoded in the DTS). To make sure we are
-  manipulating the first partition, issue the following commands:
-  > setsys bootpartition 0
-  > savesys
+* Since the GS1900-24E is a dual-partition device, you want to keep the OEM firmware on the backup partition for the time being. OpenWrt can only boot
+  from the first partition anyway (hardcoded in the DTS). To make sure we are manipulating the first partition, issue the following commands:
+  ```
+  setsys bootpartition 0
+  savesys
+  ```
 * Download the image onto the device and boot from it:
-   > tftpboot 0x84f00000 192.168.1.10:openwrt-realtek-rtl838x-zyxel_gs1900-24e-initramfs-kernel.bin
-   > bootm
+```
+    tftpboot 0x84f00000 192.168.1.10:openwrt-realtek-rtl838x-zyxel_gs1900-24e-initramfs-kernel.bin
+   bootm
+  ```
 * Once OpenWrt has booted, scp the sysupgrade image to /tmp and flash it:
-   > sysupgrade -n /tmp/openwrt-realtek-rtl838x-zyxel_gs1900-24e-squashfs-sysupgrade.bin
-   it may be necessary to restart the network (/etc/init.d/network restart) on
-   the running initramfs image.
+```
+   sysupgrade -n /tmp/openwrt-realtek-rtl838x-zyxel_gs1900-24e-squashfs-sysupgrade.bin
+```
+   it may be necessary to restart the network (/etc/init.d/network restart) on the running initramfs image.
    
    ## Un-Install
 
@@ -91,4 +89,4 @@ fw_setsys bootpartition 1
 That's the easiest method to return to stock. You can then overwrite OpenWrt with a stock firmware.
 You might need kmod-mtd-rw in order to be able to mount the config partition read/write.
 
-The first-time OpenWrt installation can also be performed from the OEM webpage, no need to attach serial (I never attached serial on the five ZyXELs that I own).
+The first-time OpenWrt installation can also be performed from the OEM webpage, no need to attach serial.
