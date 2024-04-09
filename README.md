@@ -1,4 +1,4 @@
-# opwenwrt-zyxel-gs1900-24e
+# Openwrt On Zyxel GS1900-24e
 
 source link: https://scm.linefinity.com/common/openwrt/commit/b515ad10a6e1bd5c5da0ea95366fb19c92a75dea
 
@@ -47,7 +47,7 @@ Serial connection parameters:  115200 8N1.
 * Select the Apply button. Screen will display "Prepare for firmware upgrade ..." Wait until screen shows "Do you really want to reboot?"then select the OK button
 * Once OpenWrt has booted, scp the sysupgrade image to /tmp and flash it:
 ```
-   > sysupgrade -n /tmp/realtek-rtl838x-zyxel_gs1900-24e-squashfs-sysupgrade.bin
+   sysupgrade -n /tmp/realtek-rtl838x-zyxel_gs1900-24e-squashfs-sysupgrade.bin
 ```
    it may be necessary to restart the network (/etc/init.d/network restart) on
    the running initramfs image.
@@ -69,7 +69,9 @@ Serial connection parameters:  115200 8N1.
   ```
 * Download the image onto the device and boot from it:
 ```
-    tftpboot 0x84f00000 192.168.1.10:openwrt-realtek-rtl838x-zyxel_gs1900-24e-initramfs-kernel.bin
+   tftpboot 0x84f00000 192.168.1.10:openwrt-realtek-rtl838x-zyxel_gs1900-24e-initramfs-kernel.bin
+```
+```
    bootm
   ```
 * Once OpenWrt has booted, scp the sysupgrade image to /tmp and flash it:
